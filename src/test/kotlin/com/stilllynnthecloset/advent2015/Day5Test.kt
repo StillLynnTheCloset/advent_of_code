@@ -4,9 +4,23 @@ import com.stilllynnthecloset.readFile
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class Day5bTest {
+class Day5Test {
     @Test
-    fun examples() {
+    fun examplesA() {
+        assertEquals(1, day5a("ugknbfddgicrmopn"))
+        assertEquals(1, day5a("aaa"))
+        assertEquals(0, day5a("jchzalrnumimnmhp"))
+        assertEquals(0, day5a("haegwjzuvuyypxyu"))
+        assertEquals(0, day5a("dvszwmarrgswjxmb"))
+    }
+
+    @Test
+    fun testA() {
+        assertEquals(236, day5a(readFile("2015/day5input.txt")))
+    }
+
+    @Test
+    fun examplesB() {
         assertEquals(1, day5b("qjhvhtzxzqqjkmpb"))
         assertEquals(1, day5b("xxyxx"))
         assertEquals(0, day5b("uurcxstgmygtbstg"))
@@ -17,7 +31,7 @@ class Day5bTest {
     }
 
     @Test
-    fun test() {
+    fun testB() {
         assertEquals(51, day5b(readFile("2015/day5input.txt")))
     }
 }
