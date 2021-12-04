@@ -4,16 +4,16 @@ import com.stilllynnthecloset.readFile
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class Day4Test {
+class Day04Test {
     @Test
     fun examplesA() {
-        assertEquals(609043, day4a("abcdef"))
-        assertEquals(1048970, day4a("pqrstuv"))
+        assertEquals(609043, day04a("abcdef"))
+        assertEquals(1048970, day04a("pqrstuv"))
     }
 
     @Test
     fun testA() {
-        assertEquals(254575, day4a(readFile("2015/day4input.txt")))
+        assertEquals(254575, day04a(readFile("2015/day4input.txt")))
     }
 
     @Test
@@ -23,6 +23,6 @@ class Day4Test {
 
     @Test
     fun testB() {
-        assertEquals(1038736, day4b(readFile("2015/day4input.txt")))
+        assertEquals(1038736, day04b(readFile("2015/day4input.txt")))
     }
 }

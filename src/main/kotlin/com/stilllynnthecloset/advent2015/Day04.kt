@@ -4,7 +4,7 @@ import com.stilllynnthecloset.md5
 import com.stilllynnthecloset.toHex
 import java.security.MessageDigest
 
-fun day4a(input: String): Int = input
+fun day04a(input: String): Int = input
     .let {
         val md = MessageDigest.getInstance("MD5")
         var index = 0
@@ -17,7 +17,7 @@ fun day4a(input: String): Int = input
         index
     }
 
-fun day4b(input: String): Int = input
+fun day04b(input: String): Int = input
     .let {
         val md = MessageDigest.getInstance("MD5")
         var index = 0

@@ -1,6 +1,6 @@
 package com.stilllynnthecloset.advent2021
 
-fun day2a(input: String): Int = input
+fun day02a(input: String): Int = input
     .split("\n")
     .fold(Pair(0, 0)) { acc, i ->
         val (direction, distance) = i.split(" ").let { it.first() to it.last().toInt() }
@@ -15,7 +15,7 @@ fun day2a(input: String): Int = input
 
 data class State constructor(val x: Int, val y: Int, val aim: Int)
 
-fun day2b(input: String): Int = input
+fun day02b(input: String): Int = input
     .split("\n")
     .fold(State(0, 0, 0)) { acc, i ->
         val (direction, distance) = i.split(" ").let { it.first() to it.last().toInt() }

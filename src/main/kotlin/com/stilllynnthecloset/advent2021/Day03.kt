@@ -2,7 +2,7 @@ package com.stilllynnthecloset.advent2021
 
 import com.stilllynnthecloset.bitsToInt
 
-fun day3a(input: String): Int = input
+fun day03a(input: String): Int = input
     .split("\n")
     .map { it.toList().map { it.digitToInt() } }
     .let { nums ->
@@ -13,7 +13,7 @@ fun day3a(input: String): Int = input
         gamma * epsilon
     }
 
-fun day3b(input: String): Int = input
+fun day03b(input: String): Int = input
     .split("\n")
     .let { nums ->
         val gamma = nums.filtering { mostCommonAtIndex(it) }

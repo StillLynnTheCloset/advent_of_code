@@ -42,7 +42,7 @@ fun winningScore(nums: List<Int>, boards: List<BingoBoard>): Int? {
     return null
 }
 
-fun day4a(input: String): Int = input
+fun day04a(input: String): Int = input
     .split("\n")
     .run {
         val nums = first().split(",").map { it.toInt() }
@@ -53,7 +53,7 @@ fun day4a(input: String): Int = input
         winningScore(nums, boards) ?: 0
     }
 
-fun day4b(input: String): Int = input
+fun day04b(input: String): Int = input
     .split("\n")
     .run {
         val nums = first().split(",").map { it.toInt() }

@@ -2,7 +2,7 @@ package com.stilllynnthecloset.advent2015
 
 import com.stilllynnthecloset.Position
 
-fun day3a(input: String): Int = input
+fun day03a(input: String): Int = input
     .runningFold(Position(0, 0)) { acc, c ->
         when (c) {
             '<' -> Position(acc.x - 1, acc.y)
@@ -15,7 +15,7 @@ fun day3a(input: String): Int = input
     .toSet()
     .size
 
-fun day3b(input: String): Int = input
+fun day03b(input: String): Int = input
     .runningFoldIndexed(Position(0, 0) to Position(0, 0)) { i, acc, c ->
         val oldPos = if (i.mod(2) == 1) acc.first else acc.second
         val newPos = when (c) {
