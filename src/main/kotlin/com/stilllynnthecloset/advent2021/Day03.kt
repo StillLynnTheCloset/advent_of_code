@@ -8,8 +8,8 @@ fun day03a(input: String): Int = input
     .let { nums ->
         val total = nums.size
         val sums = nums.reduce { acc, list -> acc.zip(list) { a, b -> a + b } }
-        val gamma = sums.map { if (it >= total / 2) 1 else 0 }.fold(0) {acc, i -> acc * 2 + i }
-        val epsilon = sums.map { if (it >= total / 2) 0 else 1 }.fold(0) {acc, i -> acc * 2 + i }
+        val gamma = sums.map { if (it >= total / 2) 1 else 0 }.fold(0) { acc, i -> acc * 2 + i }
+        val epsilon = sums.map { if (it >= total / 2) 0 else 1 }.fold(0) { acc, i -> acc * 2 + i }
         gamma * epsilon
     }
 

@@ -1,6 +1,6 @@
 package com.stilllynnthecloset.advent2015
 
-import com.stilllynnthecloset.Position
+private data class Position constructor(val x: Int, val y: Int)
 
 fun day03a(input: String): Int = input
     .runningFold(Position(0, 0)) { acc, c ->

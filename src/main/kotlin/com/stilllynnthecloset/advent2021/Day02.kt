@@ -13,7 +13,7 @@ fun day02a(input: String): Int = input
     }
     .let { it.first * it.second }
 
-data class State constructor(val x: Int, val y: Int, val aim: Int)
+private data class State constructor(val x: Int, val y: Int, val aim: Int)
 
 fun day02b(input: String): Int = input
     .split("\n")

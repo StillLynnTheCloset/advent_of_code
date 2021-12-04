@@ -20,7 +20,7 @@ fun MessageDigest.md5(str: String): ByteArray = digest(str.toByteArray(UTF_8))
 
 fun ByteArray.toHex() = joinToString(separator = "") { byte -> "%02x".format(byte) }
 
-fun String.bitsToInt() = fold(0) {acc, i -> acc * 2 + i.digitToInt() }
+fun String.bitsToInt() = fold(0) { acc, i -> acc * 2 + i.digitToInt() }
 
 inline fun <T> Iterable<T>.anyIndexed(predicate: (Int, T) -> Boolean): Boolean {
     var index = 0
@@ -32,6 +32,6 @@ inline fun <T> Iterable<T>.anyIndexed(predicate: (Int, T) -> Boolean): Boolean {
 inline fun <T> Iterable<T>.allIndexed(predicate: (Int, T) -> Boolean): Boolean {
     var index = 0
     if (this is Collection && isEmpty()) return true
-    for (element in this) if (!predicate(index++,element)) return false
+    for (element in this) if (!predicate(index++, element)) return false
     return true
 }

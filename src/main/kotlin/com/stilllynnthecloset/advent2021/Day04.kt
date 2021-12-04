@@ -2,24 +2,23 @@ package com.stilllynnthecloset.advent2021
 
 import com.stilllynnthecloset.allIndexed
 
-data class BingoBoard constructor(val board: List<List<Pair<Int, Boolean>>>)
+private data class BingoBoard constructor(val board: List<List<Pair<Int, Boolean>>>)
 
-
-fun BingoBoard.makeMove(move: Int): Pair<BingoBoard, Boolean> =
+private fun BingoBoard.makeMove(move: Int): Pair<BingoBoard, Boolean> =
     BingoBoard(board.map { it.map { if (it.first == move) it.first to true else it } }).let { it to it.checkBoard() }
 
-fun BingoBoard.checkBoard(): Boolean = checkRows() || checkCols() || checkDiagonals()
+private fun BingoBoard.checkBoard(): Boolean = checkRows() || checkCols() || checkDiagonals()
 
-fun BingoBoard.checkRows(): Boolean = board.any { it.all { it.second } }
+private fun BingoBoard.checkRows(): Boolean = board.any { it.all { it.second } }
 
-fun BingoBoard.checkCols(): Boolean = (0 until 5).any { col -> board.all { it[col].second } }
+private fun BingoBoard.checkCols(): Boolean = (0 until 5).any { col -> board.all { it[col].second } }
 
-fun BingoBoard.checkDiagonals() =
+private fun BingoBoard.checkDiagonals() =
     board.allIndexed { i, row -> row[i].second } || board.allIndexed { i, row -> row[i].second }
 
-fun BingoBoard.score(num: Int): Int = board.sumOf { it.sumOf { if (it.second) 0 else it.first } } * num
+private fun BingoBoard.score(num: Int): Int = board.sumOf { it.sumOf { if (it.second) 0 else it.first } } * num
 
-fun List<String>.toBoards() =
+private fun List<String>.toBoards() =
     map { row ->
         row.split(" ")
             .filter { it.isNotBlank() }
@@ -30,7 +29,7 @@ fun List<String>.toBoards() =
         .windowed(5, 5)
         .map { BingoBoard(it) }
 
-fun winningScore(nums: List<Int>, boards: List<BingoBoard>): Int? {
+private fun winningScore(nums: List<Int>, boards: List<BingoBoard>): Int? {
     var results = boards.map { it to false }
     nums.forEach { num ->
         results = results.map { it.first.makeMove(num) }

@@ -29,4 +29,3 @@ fun day04b(input: String): Int = input
         }
         index
     }
-

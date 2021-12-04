@@ -5,7 +5,7 @@ private val banned = listOf("ab", "cd", "pq", "xy")
 
 fun day05a(input: String): Int = input
     .split("\n")
-    .filter { name -> name.count { it in vowels } >= 3}
+    .filter { name -> name.count { it in vowels } >= 3 }
     .filter { name -> name.windowed(2).any { it[0] == it[1] } }
     .filter { name -> banned.all { it !in name } }
     .size
@@ -17,7 +17,11 @@ fun day05b(input: String): Int = input
         name
             .windowed(2)
             .fold(Triple(false, listOf<String>(), "")) { (success, seenPairs, lastPair), s ->
-                Triple(success || (s != lastPair && s in seenPairs) || seenPairs.count { it == s } >= 2, seenPairs + s, s)
+                Triple(
+                    first = success || (s != lastPair && s in seenPairs) || seenPairs.count { it == s } >= 2,
+                    second = seenPairs + s,
+                    third = s
+                )
             }
             .first
     }
