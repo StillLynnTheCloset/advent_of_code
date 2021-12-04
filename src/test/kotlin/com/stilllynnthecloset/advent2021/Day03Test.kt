@@ -7,21 +7,21 @@ import kotlin.test.assertEquals
 class Day03Test {
     @Test
     fun exampleA() {
-        assertEquals(198, day03a(readFile("2021/day3example.txt")))
+        assertEquals(198, day03a(readFile("2021/day03example.txt")))
     }
 
     @Test
     fun testA() {
-        assertEquals(4006064, day03a(readFile("2021/day3input.txt")))
+        assertEquals(4006064, day03a(readFile("2021/day03input.txt")))
     }
 
     @Test
     fun exampleB() {
-        assertEquals(230, day03b(readFile("2021/day3example.txt")))
+        assertEquals(230, day03b(readFile("2021/day03example.txt")))
     }
 
     @Test
     fun testB() {
-        assertEquals(5941884, day03b(readFile("2021/day3input.txt")))
+        assertEquals(5941884, day03b(readFile("2021/day03input.txt")))
     }
 }

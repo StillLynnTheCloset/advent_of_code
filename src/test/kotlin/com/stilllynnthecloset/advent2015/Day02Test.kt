@@ -13,7 +13,7 @@ class Day02Test {
 
     @Test
     fun testA() {
-        assertEquals(1598415, day02a(readFile("2015/day2input.txt")))
+        assertEquals(1598415, day02a(readFile("2015/day02input.txt")))
     }
 
     @Test
@@ -24,6 +24,6 @@ class Day02Test {
 
     @Test
     fun testB() {
-        assertEquals(3812909, day02b(readFile("2015/day2input.txt")))
+        assertEquals(3812909, day02b(readFile("2015/day02input.txt")))
     }
 }
