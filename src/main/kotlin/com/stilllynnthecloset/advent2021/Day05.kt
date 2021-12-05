@@ -22,9 +22,9 @@ fun day05b(input: String): Int = input
 
 private fun lineBetweenPoints(a: Position, b: Position): List<Position> =
     if (a.x == b.x) {
-        (min(a.y, b.y) .. max(a.y, b.y)).map { Position(a.x, it) }
+        intProgression(a.y, b.y).map { Position(a.x, it) }
     } else if (a.y == b.y) {
-        (min(a.x, b.x) .. max(a.x, b.x)).map { Position(it, a.y) }
+        intProgression(a.x, b.x).map { Position(it, a.y) }
     } else {
         intProgression(a.x, b.x).zip(intProgression(a.y, b.y)) { x, y -> Position(x, y) }
     }

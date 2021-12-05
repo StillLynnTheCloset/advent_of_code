@@ -1,20 +1,16 @@
 package com.stilllynnthecloset.advent2021
 
-import com.stilllynnthecloset.allIndexed
-
-private data class BingoBoard constructor(val board: List<List<Pair<Int, Boolean>>>)
+@JvmInline
+private value class BingoBoard constructor(val board: List<List<Pair<Int, Boolean>>>)
 
 private fun BingoBoard.makeMove(move: Int): Pair<BingoBoard, Boolean> =
     BingoBoard(board.map { it.map { if (it.first == move) it.first to true else it } }).let { it to it.checkBoard() }
 
-private fun BingoBoard.checkBoard(): Boolean = checkRows() || checkCols() || checkDiagonals()
+private fun BingoBoard.checkBoard(): Boolean = checkRows() || checkCols()
 
 private fun BingoBoard.checkRows(): Boolean = board.any { it.all { it.second } }
 
 private fun BingoBoard.checkCols(): Boolean = (0 until 5).any { col -> board.all { it[col].second } }
-
-private fun BingoBoard.checkDiagonals() =
-    board.allIndexed { i, row -> row[i].second } || board.allIndexed { i, row -> row[i].second }
 
 private fun BingoBoard.score(num: Int): Int = board.sumOf { it.sumOf { if (it.second) 0 else it.first } } * num
 

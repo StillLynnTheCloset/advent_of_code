@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    implementation(kotlin("stdlib"))
-    implementation("com.squareup.okio:okio:2.10.0")
-    testImplementation(kotlin("test"))
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.6.0")
+    implementation("com.squareup.okio:okio:3.0.0")
+    testImplementation("org.jetbrains.kotlin:kotlin-test:1.6.0")
 }
