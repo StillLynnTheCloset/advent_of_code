@@ -5,6 +5,8 @@ import okio.source
 import java.nio.charset.StandardCharsets.UTF_8
 import java.security.MessageDigest
 
+data class Position constructor(val x: Int, val y: Int)
+
 fun readFile(path: String): String = Thread
     .currentThread()
     .contextClassLoader
@@ -35,3 +37,10 @@ inline fun <T> Iterable<T>.allIndexed(predicate: (Int, T) -> Boolean): Boolean {
     for (element in this) if (!predicate(index++, element)) return false
     return true
 }
+
+fun intProgression(a: Int, b: Int): IntProgression =
+    if (a > b) {
+        IntProgression.fromClosedRange(a, b, -1)
+    } else {
+        IntProgression.fromClosedRange(a, b, 1)
+    }
