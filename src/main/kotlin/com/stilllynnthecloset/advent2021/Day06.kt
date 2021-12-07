@@ -1,18 +1,17 @@
 package com.stilllynnthecloset.advent2021
 
 fun day06a(input: String): Long = input
-    .split(',')
-    .map { it.toInt() }
+    .parse()
     .runSimulation(80)
 
 fun day06b(input: String): Long = input
-    .split(',')
-    .map { it.toInt() }
+    .parse()
     .runSimulation(256)
 
-
-private fun List<Int>.runSimulation(days: Int): Long =
-    groupBy { it }
+private fun String.parse(): LongArray =
+    split(',')
+        .map { it.toInt() }
+        .groupBy { it }
         .let { groups ->
             LongArray(9)
                 .also { array ->
@@ -21,21 +20,11 @@ private fun List<Int>.runSimulation(days: Int): Long =
                     }
                 }
         }
-        .let {
-            (0 until days).fold(it) { acc, _ ->
-                runDay(acc)
-            }
-        }
-        .sumOf { it }
 
-private fun runDay(fish: LongArray): LongArray = LongArray(9).also {
-    it[0] = fish[1]
-    it[1] = fish[2]
-    it[2] = fish[3]
-    it[3] = fish[4]
-    it[4] = fish[5]
-    it[5] = fish[6]
-    it[6] = fish[7] + fish[0]
-    it[7] = fish[8]
-    it[8] = fish[0]
+private tailrec fun LongArray.runSimulation(days: Int): Long =
+    if (days == 0) sumOf { it } else runDay().runSimulation(days - 1)
+
+private fun LongArray.runDay(): LongArray = LongArray(9).also { newArray ->
+    newArray.indices.forEach { newArray[it] = this[(it + 1) % newArray.size] }
+    newArray[6] += this[0]
 }
