@@ -44,3 +44,7 @@ fun intProgression(a: Int, b: Int): IntProgression =
     } else {
         IntProgression.fromClosedRange(a, b, 1)
     }
+
+fun List<Int>.range(): IntRange = (minOf { it }..maxOf { it })
+
+fun List<Long>.range(): LongRange = (minOf { it }..maxOf { it })
