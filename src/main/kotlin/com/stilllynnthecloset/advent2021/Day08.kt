@@ -10,7 +10,7 @@ fun day08b(input: String): Int = input
     .sum()
 
 private fun String.parse(): List<Pair<List<String>, List<String>>> =
-    split('\n')
+    lines()
         .map {
             it.split(" | ").let {
                 it[0].split(" ") to it[1].split(" ")

@@ -1,6 +1,7 @@
 package com.stilllynnthecloset.advent2021
 
 import com.stilllynnthecloset.Position
+import com.stilllynnthecloset.gridOnEach
 import com.stilllynnthecloset.product
 
 fun day09a(input: String): Int = input
@@ -39,14 +40,12 @@ private fun List<List<Int>>.findValidSurroundingPositions(x: Int, y: Int): List<
 
 private fun List<List<Int>>.findBasins(): List<Set<Position>> {
     val basins = mutableListOf<Set<Position>>()
-    this.indices.forEach { y ->
-        this[y].indices.forEach { x ->
-            val pos = Position(x, y)
-            // Heights of 9 can't be in a basin
-            // If this position is already in a basin, skip it
-            if (this[y][x] != 9 && basins.none { pos in it }) {
-                basins.add(findBasin(pos))
-            }
+    gridOnEach { x, y, value ->
+        val pos = Position(x, y)
+        // Heights of 9 can't be in a basin
+        // If this position is already in a basin, skip it
+        if (value != 9 && basins.none { pos in it }) {
+            basins.add(findBasin(pos))
         }
     }
     return basins

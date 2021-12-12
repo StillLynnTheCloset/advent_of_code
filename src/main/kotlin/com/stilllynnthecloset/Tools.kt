@@ -48,3 +48,36 @@ fun intProgression(a: Int, b: Int): IntProgression =
 fun List<Int>.range(): IntRange = (minOf { it }..maxOf { it })
 
 fun List<Long>.range(): LongRange = (minOf { it }..maxOf { it })
+
+fun <T> List<List<T>>.gridOnEach(block: (x: Int, y: Int, value: T) -> Unit): List<List<T>> {
+    this.indices.forEach { x ->
+        this[x].indices.forEach { y ->
+            block(x, y, this[x][y])
+        }
+    }
+    return this
+}
+
+fun <T, K> List<List<T>>.gridMap(block: (x: Int, y: Int, value: T) -> K): List<List<K>> {
+    return this.indices.map { x ->
+        this[x].indices.map { y ->
+            block(x, y, this[x][y])
+        }
+    }
+}
+
+fun <T, K> List<List<T>>.gridFlatMap(block: (x: Int, y: Int, value: T) -> K): List<K> {
+    return this.indices.flatMap { x ->
+        this[x].indices.map { y ->
+            block(x, y, this[x][y])
+        }
+    }
+}
+
+fun <T, K : Any> List<List<T>>.gridFlatMapNotNull(block: (x: Int, y: Int, value: T) -> K?): List<K> {
+    return this.indices.flatMap { x ->
+        this[x].indices.mapNotNull { y ->
+            block(x, y, this[x][y])
+        }
+    }
+}
