@@ -22,19 +22,19 @@ private fun String.parse(): List<List<Int>> =
         .map { it.map { it.digitToInt() } }
 
 private fun List<List<Int>>.findLocalMinima(): List<Int> =
-    flatMapIndexed { y: Int, list: List<Int> ->
-        list.filterIndexed { x, i -> isLocalMinimum(x, y) }
+    flatMapIndexed { x: Int, list: List<Int> ->
+        list.filterIndexed { y, i -> isLocalMinimum(x, y) }
     }
 
 private fun List<List<Int>>.isLocalMinimum(x: Int, y: Int): Boolean =
-    findValidSurroundingPositions(x, y).all { this[it.y][it.x] > this[y][x] }
+    findValidSurroundingPositions(x, y).all { this[it.x][it.y] > this[x][y] }
 
 private fun List<List<Int>>.findValidSurroundingPositions(x: Int, y: Int): List<Position> {
     return mutableListOf<Position>().also {
         if (x != 0) it.add(Position(x - 1, y))
         if (y != 0) it.add(Position(x, y - 1))
-        if (x != this[y].lastIndex) it.add(Position(x + 1, y))
-        if (y != this.lastIndex) it.add(Position(x, y + 1))
+        if (y != this[x].lastIndex) it.add(Position(x, y + 1))
+        if (x != this.lastIndex) it.add(Position(x + 1, y))
     }
 }
 
@@ -59,7 +59,7 @@ private fun List<List<Int>>.findBasin(position: Position): Set<Position> {
         basin.add(current)
         queue.addAll(
             findValidSurroundingPositions(current.x, current.y)
-                .filter { it !in basin && this[it.y][it.x] != 9 }
+                .filter { it !in basin && this[it.x][it.y] != 9 }
         )
     }
     return basin
