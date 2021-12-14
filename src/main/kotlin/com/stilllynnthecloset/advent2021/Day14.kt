@@ -2,24 +2,26 @@ package com.stilllynnthecloset.advent2021
 
 fun day14a(input: String): Int = input
     .lines()
-    .size // TODO: Broke this while working on part B, fix later
-//    .let {
-//        val start = it.first()
-//
-//        val instructions = it.filter { " -> " in it }.map { it.split(" -> ").let { it.first() to it.last() } }.toMap()
-//        (0 until 10).fold(start) { acc, _ ->
-//            ""
-//        }
-//            .groupBy { it }
-//            .mapValues { it.value.size }
-//    }
-//    .let {
-//        val max = it.maxByOrNull { it.value }
-//        val min = it.minByOrNull { it.value }
-//        println(max)
-//        println(min)
-//        max!!.value - min!!.value
-//    }
+    .let {
+        val start = it.first()
+        val instructions = it
+            .filter { " -> " in it }
+            .associate { it.split(" -> ").let { it.first() to it.last() } }
+
+        (0 until 10).fold(start) { acc, _ ->
+            acc.drop(1).fold(acc.first().toString()) { stringAcc, c ->
+                val instruction = instructions["${stringAcc.last()}$c"].orEmpty()
+                stringAcc + instruction + c
+            }
+        }
+            .groupBy { it }
+            .mapValues { it.value.size }
+    }
+    .let {
+        val max = it.maxByOrNull { it.value }
+        val min = it.minByOrNull { it.value }
+        max!!.value - min!!.value
+    }
 
 fun day14b(input: String): Long = input
     .lines()
@@ -33,6 +35,7 @@ fun day14b(input: String): Long = input
         val instructions = it
             .filter { " -> " in it }
             .associate { it.split(" -> ").let { it.first() to it.last() } }
+
         (0 until 40).fold(accumulator) { acc, _ ->
             val new = mutableMapOf<String, Long>()
             acc.forEach {
@@ -52,7 +55,7 @@ fun day14b(input: String): Long = input
     .toList()
     .map { it.first.first() to it.second }
     .groupBy { it.first }
-    .mapValues { it.value.sumOf { it.second }  + if (it.key == 'B') 1 else 0}
+    .mapValues { it.value.sumOf { it.second } + if (it.key == 'B') 1 else 0 }
     .let {
         val max = it.maxByOrNull { it.value }
         val min = it.minByOrNull { it.value }
