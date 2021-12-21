@@ -17,6 +17,7 @@ fun readFile(path: String): String = Thread
     .orEmpty()
 
 fun Iterable<Int>.product(): Int = fold(1) { acc, i -> acc * i }
+fun Iterable<Long>.product(): Long = fold(1) { acc, i -> acc * i }
 
 fun MessageDigest.md5(str: String): ByteArray = digest(str.toByteArray(UTF_8))
 
@@ -81,3 +82,17 @@ fun <T, K : Any> List<List<T>>.gridFlatMapNotNull(block: (x: Int, y: Int, value:
         }
     }
 }
+
+// Takes the values starting from the beginning up to and including the element for which predicate is false
+inline fun <T> Iterable<T>.takeThrough(predicate: (T) -> Boolean): List<T> {
+    val list = ArrayList<T>()
+    for (item in this) {
+        list.add(item)
+        if (predicate(item)) {
+            break
+        }
+    }
+    return list
+}
+
+fun String.asBinary(): Int = Integer.parseInt(this, 2)
