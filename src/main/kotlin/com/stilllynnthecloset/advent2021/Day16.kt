@@ -15,58 +15,69 @@ data class ConstantPacket constructor(override val version: Int, val value: Long
         return value
     }
 }
+
 sealed class OperatorPacket : Packet() {
     abstract val subPackets: List<Packet>
 }
+
 data class SumPacket constructor(
     override val version: Int,
     override val subPackets: List<Packet>,
-): OperatorPacket() {
+) : OperatorPacket() {
     override fun evaluate(): Long = subPackets.sumOf { it.evaluate() }
 }
+
 data class ProductPacket constructor(
     override val version: Int,
     override val subPackets: List<Packet>,
-): OperatorPacket() {
+) : OperatorPacket() {
     override fun evaluate(): Long = subPackets.map { it.evaluate() }.product()
 }
+
 data class MinimumPacket constructor(
     override val version: Int,
     override val subPackets: List<Packet>,
-): OperatorPacket() {
+) : OperatorPacket() {
     override fun evaluate(): Long = subPackets.minOf { it.evaluate() }
 }
+
 data class MaximumPacket constructor(
     override val version: Int,
     override val subPackets: List<Packet>,
-): OperatorPacket() {
+) : OperatorPacket() {
     override fun evaluate(): Long = subPackets.maxOf { it.evaluate() }
 }
+
 data class GreaterPacket constructor(
     override val version: Int,
     override val subPackets: List<Packet>,
-): OperatorPacket() {
+) : OperatorPacket() {
     init {
         require(subPackets.size == 2) { "Boolean operation requires exactly 2 sub packets" }
     }
+
     override fun evaluate(): Long = if (subPackets.first().evaluate() > subPackets.last().evaluate()) 1 else 0
 }
+
 data class LessPacket constructor(
     override val version: Int,
     override val subPackets: List<Packet>,
-): OperatorPacket() {
+) : OperatorPacket() {
     init {
         require(subPackets.size == 2) { "Boolean operation requires exactly 2 sub packets" }
     }
+
     override fun evaluate(): Long = if (subPackets.first().evaluate() < subPackets.last().evaluate()) 1 else 0
 }
+
 data class EqualPacket constructor(
     override val version: Int,
     override val subPackets: List<Packet>,
-): OperatorPacket() {
+) : OperatorPacket() {
     init {
         require(subPackets.size == 2) { "Boolean operation requires exactly 2 sub packets" }
     }
+
     override fun evaluate(): Long = if (subPackets.first().evaluate() == subPackets.last().evaluate()) 1 else 0
 }
 
@@ -83,8 +94,7 @@ private fun String.parsePacket(): Pair<Packet, Int> {
         throw IllegalStateException("Packet too short: $this")
     }
     val version = take(3).asBinary()
-    val type = drop(3).take(3).asBinary()
-    return when (type) {
+    return when (val type = drop(3).take(3).asBinary()) {
         4 -> {
             val groups = drop(6)
                 .windowed(5, step = 5)
@@ -102,9 +112,9 @@ private fun String.parsePacket(): Pair<Packet, Int> {
             val len = drop(7).take(lengthTypeLength).asBinary()
 
             val subPackets = if (lengthType == '0') {
-                drop(7+lengthTypeLength).parseSubPacketsLength(len)
+                drop(7 + lengthTypeLength).parseSubPacketsLength(len)
             } else {
-                drop(7+lengthTypeLength).parseSubPacketsCount(len)
+                drop(7 + lengthTypeLength).parseSubPacketsCount(len)
             }
 
             val packet = when (type) {
@@ -155,9 +165,9 @@ private fun String.parseSubPacketsLength(subPacketLength: Int): Pair<List<Packet
 }
 
 private fun Packet.sumVersions(): Int = when (this) {
-        is ConstantPacket -> version
-        is OperatorPacket -> version + subPackets.sumOf { it.sumVersions() }
-    }
+    is ConstantPacket -> version
+    is OperatorPacket -> version + subPackets.sumOf { it.sumVersions() }
+}
 
 fun day16b(input: String): Long = input
     .map { it.digitToInt(16) }

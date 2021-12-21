@@ -17,6 +17,7 @@ fun readFile(path: String): String = Thread
     .orEmpty()
 
 fun Iterable<Int>.product(): Int = fold(1) { acc, i -> acc * i }
+
 fun Iterable<Long>.product(): Long = fold(1) { acc, i -> acc * i }
 
 fun MessageDigest.md5(str: String): ByteArray = digest(str.toByteArray(UTF_8))
