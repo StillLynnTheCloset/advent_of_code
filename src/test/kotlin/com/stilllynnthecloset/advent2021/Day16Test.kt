@@ -15,7 +15,9 @@ class Day16Test {
         assertEquals(23, day16a("C0015000016115A2E0802F182340"))
         assertEquals(31, day16a("A0016C880162017C3686B18A3D4780"))
         // First child of the full input
-        assertEquals(17, day16a("E2004100AA9C0199CA6A3D9D6352294D47B3AC6A4335FBE3FDD24"))
+        assertEquals(17,
+            day16a("E2004100AA9C0199CA6A3D9D6352294D47B3AC6A4335FBE3FDD24")
+        )
     }
 
     @Test

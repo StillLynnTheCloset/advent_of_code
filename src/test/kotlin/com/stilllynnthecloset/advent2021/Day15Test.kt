@@ -11,12 +11,15 @@ class Day15Test {
 
     @Test
     fun exampleA2() {
-        assertEquals(9, day15a("""
+        assertEquals(9, day15a(
+            """
             19111
             11191
             99991
             11111
-        """.trimIndent()))
+        """.trimIndent()
+        )
+        )
     }
 
     @Test
